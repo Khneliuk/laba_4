@@ -88,13 +88,13 @@ class Program
     {
         static void Main()
         {
-            City kyiv = new City("Київ", 2800000);
-            City lviv = new City("Львів", 720000);
+            City kyiv = new City("Київ", 3600000);
+            City lviv = new City("Львів", 1000000);
             City odessa = new City("Одеса", 1000000);
             
             Region r1 = new Region("Київська", 28131, kyiv);
             Region r2 = new Region("Львівська", 21833, lviv);
-            Region r3 = new Region("Одеська", 33310, odessa);
+            Region r3 = new Region("Одеська", 33314, odessa);
 
             Country сountry = new Country("Україна", kyiv, new Region[] { r1, r2, r3 });
 
