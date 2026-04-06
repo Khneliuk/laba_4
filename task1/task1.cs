@@ -26,4 +26,13 @@ public class task1
             return Name.GetHashCode();
         }
 	}
+	public class District
+    {
+        public string Name;
+        public District(string name)
+        {
+            this.Name = name;
+            Console.WriteLine("створено район: " + name);
+        }
+    }
 }
