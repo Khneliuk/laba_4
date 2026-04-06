@@ -43,5 +43,19 @@ public class task2
             return base.GetInfo() + ", район: " + this.district;
         }
     }
+    public class IntercityTrip : Trip
+    {
+        private string destinationCity;
+
+        public IntercityTrip(string code, double distance, double basePrice, string destinationCity) 
+            : base(code, distance, basePrice)
+        {
+            this.destinationCity = destinationCity;
+        }
+        public override string GetInfo()
+        {
+            return base.GetInfo() + ", місто призначення: " + this.destinationCity;
+        }
+    }
     
 }
