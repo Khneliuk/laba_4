@@ -48,4 +48,38 @@ public class task1
             Console.WriteLine("створено область: " + name);
         }
     }
+	public class Country
+    {
+        public string Name;
+        public City Capital;
+        public Region[] Regions; 
+        public Country(string name, City capital, Region[] regions)
+        {
+            this.Name = name;
+            this.Capital = capital;
+            this.Regions = regions;
+            Console.WriteLine("створено об'єкт Держава: " + name);
+        }
+        public void printCapital()
+        {
+            Console.WriteLine("столиця: " + Capital.Name);
+        }
+        public void printRegionsCount()
+        {
+            Console.WriteLine("кількість областей: " + Regions.Length);
+        }
+        public void printTotalArea()
+        {
+            double total = 0;
+            foreach (Region r in Regions) total += r.Area;
+            Console.WriteLine("загальна площа: " + total + " кв. км");
+        }
+        public void printCenters()
+        {
+            Console.WriteLine("обласні центри:");
+            foreach (Region r in Regions)
+            {
+                Console.WriteLine("- " + r.Center.Name);
+            }
+        }
 }
