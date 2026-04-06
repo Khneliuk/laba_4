@@ -35,4 +35,17 @@ public class task1
             Console.WriteLine("створено район: " + name);
         }
     }
+	public class Region
+    {
+        public string Name;
+        public double Area;
+        public City Center; 
+        public Region(string name, double area, City center)
+        {
+            this.Name = name;
+            this.Area = area;
+            this.Center = center;
+            Console.WriteLine("створено область: " + name);
+        }
+    }
 }
