@@ -16,8 +16,11 @@ namespace laba_4;
         }
         public override bool Equals(object? obj)
         {
-            City? other = obj as City;
-            return other != null && this.Name == other.Name;
+            if (obj is City other)
+			{
+				return this.Name == other.Name;
+			}
+            return false;
         }
         public override int GetHashCode()
         {
