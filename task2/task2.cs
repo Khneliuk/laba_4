@@ -29,5 +29,19 @@ public class task2
             return this.distance > 50;
         }
     }
+    public class CityTrip : Trip
+    {
+        private string district;
+
+        public CityTrip(string code, double distance, double basePrice, string district) 
+            : base(code, distance, basePrice)
+        {
+            this.district = district;
+        }
+        public override string GetInfo()
+        {
+            return base.GetInfo() + ", район: " + this.district;
+        }
+    }
     
 }
