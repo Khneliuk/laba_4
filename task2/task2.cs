@@ -57,5 +57,34 @@ public class task2
             return base.GetInfo() + ", місто призначення: " + this.destinationCity;
         }
     }
-    
+    class Program
+    {
+        static void Main()
+        {
+            List<Trip> allTrips = new List<Trip>();
+
+            allTrips.Add(new CityTrip("C-101", 15.0, 180, "Печерський"));
+            allTrips.Add(new IntercityTrip("I-202", 480.5, 3500, "Одеса"));
+            allTrips.Add(new CityTrip("C-103", 62.0, 750, "Оболонський"));
+
+            double totalPrice = 0;
+            int longTripsCount = 0;
+
+            foreach (Trip trip in allTrips)
+            {
+                Console.WriteLine(trip.GetInfo());
+                totalPrice += trip.BasePrice;
+                if (trip.IsLongTrip())
+                {
+                    longTripsCount++;
+                }
+            }
+
+            Console.WriteLine("загальна кількість поїздок: " + Trip.TotalTripsCount);
+            Console.WriteLine("загальна сума за всі поїздки: " + totalPrice + " грн");
+            Console.WriteLine("кількість довгих поїздок: " + longTripsCount);
+
+            Console.ReadLine();
+        }
+    }
 }
