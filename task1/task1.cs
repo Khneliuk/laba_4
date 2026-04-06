@@ -82,4 +82,27 @@ public class task1
                 Console.WriteLine("- " + r.Center.Name);
             }
         }
+	}
 }
+class Program
+    {
+        static void Main()
+        {
+            City kyiv = new City("Київ", 2800000);
+            City lviv = new City("Львів", 720000);
+            City odessa = new City("Одеса", 1000000);
+            
+            Region r1 = new Region("Київська", 28131, kyiv);
+            Region r2 = new Region("Львівська", 21833, lviv);
+            Region r3 = new Region("Одеська", 33310, odessa);
+
+            Country сountry = new Country("Україна", kyiv, new Region[] { r1, r2, r3 });
+
+            сountry.printCapital();
+            сountry.printRegionsCount();
+            сountry.printTotalArea();
+            сountry.printCenters();
+
+            Console.ReadLine();
+        }
+    }
