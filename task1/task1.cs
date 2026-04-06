@@ -1,7 +1,5 @@
 using System;
 namespace laba_4;
-public class task1
-{
     public class City
 	{
 		public string Name;
@@ -62,7 +60,7 @@ public class task1
         }
         public void printCapital()
         {
-            Console.WriteLine("столиця: " + Capital.Name);
+            Console.WriteLine("столиця: " + Capital);
         }
         public void printRegionsCount()
         {
@@ -79,11 +77,11 @@ public class task1
             Console.WriteLine("обласні центри:");
             foreach (Region r in Regions)
             {
-                Console.WriteLine("- " + r.Center.Name);
+                Console.WriteLine("- " + r.Center);
             }
         }
 	}
-}
+
 class Program
     {
         static void Main()
