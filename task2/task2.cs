@@ -1,39 +1,43 @@
 using System;
 using System.Collections.Generic;
+
 namespace laba_4;
+
 public class task2
 {
     public class Trip
     {
-        private readonly string code; 
+        private readonly string code;
         private double distance;
         private double basePrice;
         public static int TotalTripsCount = 0;
+
         public Trip(string code, double distance, double basePrice)
         {
             this.code = code;
             this.distance = distance;
             this.basePrice = basePrice;
-            Trip.TotalTripsCount++; 
+            Trip.TotalTripsCount++;
         }
-        public double BasePrice
-        {
-            get { return this.basePrice; }
-        }
+
+        public string Code => code;
+        public double BasePrice => basePrice;
+
         public virtual string GetInfo()
         {
             return "код: " + this.code + ", відстань: " + this.distance + " км, ціна: " + this.basePrice + " грн";
         }
+
         public bool IsLongTrip()
         {
             return this.distance > 50;
         }
     }
+
     public class CityTrip : Trip
     {
         private string district;
-
-        public CityTrip(string code, double distance, double basePrice, string district) 
+        public CityTrip(string code, double distance, double basePrice, string district)
             : base(code, distance, basePrice)
         {
             this.district = district;
@@ -43,11 +47,11 @@ public class task2
             return base.GetInfo() + ", район: " + this.district;
         }
     }
+
     public class IntercityTrip : Trip
     {
         private string destinationCity;
-
-        public IntercityTrip(string code, double distance, double basePrice, string destinationCity) 
+        public IntercityTrip(string code, double distance, double basePrice, string destinationCity)
             : base(code, distance, basePrice)
         {
             this.destinationCity = destinationCity;
@@ -57,7 +61,8 @@ public class task2
             return base.GetInfo() + ", місто призначення: " + this.destinationCity;
         }
     }
-public class TaxiService
+
+    public class TaxiService
     {
         private List<Trip> allTrips = new List<Trip>();
 
@@ -73,7 +78,7 @@ public class TaxiService
             if (tripToRemove != null)
             {
                 allTrips.Remove(tripToRemove);
-                Trip.TotalTripsCount--; 
+                Trip.TotalTripsCount--;
                 Console.WriteLine($"поїздку {code} видалено");
             }
             else
@@ -95,24 +100,25 @@ public class TaxiService
                 if (trip.IsLongTrip()) longCount++;
             }
 
-            Console.WriteLine("загальна кількість поїздок: " + Trip.TotalTripsCount);
-            Console.WriteLine("загальна сума за всі поїздки: " + totalPrice + " грн");
-            Console.WriteLine("кількість довгих поїздок: " + longTripsCount);
+            Console.WriteLine("загальна кількість поїздок: " + allTrips.Count);
+            Console.WriteLine("загальна сума: " + totalPrice + " грн");
+            Console.WriteLine("кількість довгих поїздок: " + longCount);
         }
+    }
+
     class Program
     {
         static void Main()
         {
             TaxiService service = new TaxiService();
 
-            allTrips.Add(new CityTrip("C-101", 15.0, 180, "Печерський"));
-            allTrips.Add(new IntercityTrip("I-202", 480.5, 3500, "Одеса"));
-            allTrips.Add(new CityTrip("C-103", 62.0, 750, "Оболонський"));
-
-            service.PrintReport();
-            service.RemoveTrip("C-101");
+            service.AddTrip(new CityTrip("C-101", 15.0, 180, "Печерський"));
+            service.AddTrip(new IntercityTrip("I-202", 480.5, 3500, "Одеса"));
+            service.AddTrip(new CityTrip("C-103", 62.0, 750, "Оболонський"));
+            service.PrintReport();            
+            service.RemoveTrip("C-101");            
             service.PrintReport();
             Console.ReadLine();
         }
-    }
+    } 
 }
