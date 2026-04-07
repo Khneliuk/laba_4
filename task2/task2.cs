@@ -57,33 +57,61 @@ public class task2
             return base.GetInfo() + ", місто призначення: " + this.destinationCity;
         }
     }
-    class Program
+public class TaxiService
     {
-        static void Main()
+        private List<Trip> allTrips = new List<Trip>();
+
+        public void AddTrip(Trip trip)
         {
-            List<Trip> allTrips = new List<Trip>();
+            allTrips.Add(trip);
+            Console.WriteLine($"додано поїздку {trip.Code}");
+        }
 
-            allTrips.Add(new CityTrip("C-101", 15.0, 180, "Печерський"));
-            allTrips.Add(new IntercityTrip("I-202", 480.5, 3500, "Одеса"));
-            allTrips.Add(new CityTrip("C-103", 62.0, 750, "Оболонський"));
+        public void RemoveTrip(string code)
+        {
+            Trip tripToRemove = allTrips.Find(t => t.Code == code);
+            if (tripToRemove != null)
+            {
+                allTrips.Remove(tripToRemove);
+                Trip.TotalTripsCount--; 
+                Console.WriteLine($"поїздку {code} видалено");
+            }
+            else
+            {
+                Console.WriteLine($"поїздку з кодом {code} не знайдено");
+            }
+        }
 
+        public void PrintReport()
+        {
+            Console.WriteLine("\nсервіс таксі");
             double totalPrice = 0;
-            int longTripsCount = 0;
+            int longCount = 0;
 
-            foreach (Trip trip in allTrips)
+            foreach (var trip in allTrips)
             {
                 Console.WriteLine(trip.GetInfo());
                 totalPrice += trip.BasePrice;
-                if (trip.IsLongTrip())
-                {
-                    longTripsCount++;
-                }
+                if (trip.IsLongTrip()) longCount++;
             }
 
             Console.WriteLine("загальна кількість поїздок: " + Trip.TotalTripsCount);
             Console.WriteLine("загальна сума за всі поїздки: " + totalPrice + " грн");
             Console.WriteLine("кількість довгих поїздок: " + longTripsCount);
+        }
+    class Program
+    {
+        static void Main()
+        {
+            TaxiService service = new TaxiService();
 
+            allTrips.Add(new CityTrip("C-101", 15.0, 180, "Печерський"));
+            allTrips.Add(new IntercityTrip("I-202", 480.5, 3500, "Одеса"));
+            allTrips.Add(new CityTrip("C-103", 62.0, 750, "Оболонський"));
+
+            service.PrintReport();
+            service.RemoveTrip("C-101");
+            service.PrintReport();
             Console.ReadLine();
         }
     }
